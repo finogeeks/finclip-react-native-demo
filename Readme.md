@@ -13,7 +13,7 @@
 ```
 npm install -g react-native-cli yarn
 ```
-官方的环境搭建文档已经有详细的说明，这里不再重复。大家可以看下我本地的环境配置版本，目前整个项目运行稳定，可以借鉴。
+官方的[环境搭建文档](https://reactnative.dev/docs/environment-setup)已经有详细的说明，这里不再重复。大家可以看下我本地的环境配置版本，目前整个项目运行稳定，可以借鉴。
 
 ```bash
 $ react-native info
