@@ -82,7 +82,7 @@ react-native init mopdemo
 "react-native-mopsdk": "^1.0.1"
 ```
 
-2. 在 main.dart 文件中增加以下小程序引擎初始化方法。 Mop.instance.initialize 这里需要用到 sdkkey 和 secret。可以直接在https://mp.finogeeks.com免费注册获取。注册使用方法可以参考[接入指引](https://mp.finogeeks.com/mop/document/introduce/access/mechanism.html)
+2. 在 main.dart 文件中增加以下小程序引擎初始化方法。 Mop.instance.initialize 这里需要用到 sdkkey 和 secret。可以直接在[https://mp.finogeeks.com](https://mp.finogeeks.com) 免费注册获取。注册使用方法可以参考 [接入指引](https://mp.finogeeks.com/mop/document/introduce/access/mechanism.html)
 
 ```javascript
 import MopSDK from 'react-native-mopsdk';
