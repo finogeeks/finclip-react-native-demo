@@ -12,33 +12,36 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import MopSDK from 'react-native-mopsdk';
 const onPressOpenCanvasApplet = () => {
-  MopSDK.openApplet('5e933835b795a5000199d547', '', '', (data) => { });
+  MopSDK.openApplet('5ea03fa563cb900001d73863', '', '', (data) => { });
 };
 const onPressOpenDemoApplet = () => {
-  MopSDK.openApplet('5e4d123647edd60001055df1', '', '', (data) => { });
+  MopSDK.openApplet('5ea0401463cb900001d73865', '', '', (data) => { });
 };
 const onPressOpenProfileApplet = () => {
-  MopSDK.openApplet('5e637a18cbfae4000170fa7a', '', '', (data) => { });
+  MopSDK.openApplet('5ea0412663cb900001d73867', '', '', (data) => { });
 };
 export default class App extends Component<{}> {
   state = {
     status: 'starting',
-    message: '--'
+    message: '--',
   };
   componentDidMount() {
-    MopSDK.initialize({
-      appkey: '22LyZEib0gLTQdU3MUauASlb4KFRNRajt4RmY6UDSucA',
-      secret: '4a915e447bcbd439',
-      apiServer: 'https://mp.finogeeks.com',
-      apiPrefix: '/api/v1/mop'
-    }, (data) => {
-      console.log('message;', data);
-      const s = JSON.stringify(data);
-      this.setState({
-        status: 'native callback received',
-        message: s
-      });
-    });
+    MopSDK.initialize(
+      {
+        appkey: '22LyZEib0gLTQdU3MUauASlb4KFRNRajt4RmY6UDSucA',
+        secret: 'c5cc7a8c14a2b04a',
+        apiServer: 'https://mp.finogeeks.com',
+        apiPrefix: '/api/v1/mop',
+      },
+      (data) => {
+        console.log('message;', data);
+        const s = JSON.stringify(data);
+        this.setState({
+          status: 'native callback received',
+          message: s,
+        });
+      },
+    );
   }
   render() {
     return (
