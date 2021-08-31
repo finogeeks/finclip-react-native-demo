@@ -24,30 +24,30 @@ System:
     Memory: 93.87 MB / 16.00 GB
     Shell: 3.2.57 - /bin/bash
   Binaries:
-    Node: 10.20.1 - ~/.nvm/versions/node/v10.20.1/bin/node
+    Node: 16.4.0 - ~/.nvm/versions/node/v10.20.1/bin/node
     Yarn: 1.22.4 - ~/.nvm/versions/node/v10.20.1/bin/yarn
-    npm: 6.14.4 - ~/.nvm/versions/node/v10.20.1/bin/npm
+    npm: 7.18.1 - ~/.nvm/versions/node/v10.20.1/bin/npm
     Watchman: Not Found
   Managers:
-    CocoaPods: 1.9.1 - /usr/local/bin/pod
+    CocoaPods: 1.10.1 - /usr/local/bin/pod
   SDKs:
     iOS SDK:
-      Platforms: iOS 13.4, DriverKit 19.0, macOS 10.15, tvOS 13.4, watchOS 6.2
+      Platforms: iOS 14.4, DriverKit 20.2, macOS 11.1, tvOS 14.3, watchOS 7.2
     Android SDK:
-      API Levels: 26, 28, 29
-      Build Tools: 28.0.3, 29.0.2, 29.0.3, 30.0.0
-      System Images: android-26 | Google Play Intel x86 Atom
-      Android NDK: Not Found
+      API Levels: 22, 23, 24, 25, 26, 27, 28, 29, 30
+      Build Tools: 23.0.2, 23.0.3, 25.0.0, 26.0.2, 27.0.0, 27.0.3, 28.0.3, 29.0.2, 30.0.2
+      System Images: android-28 | Google APIs Intel x86 Atom, android-30 | Google APIs Intel x86 Atom
+      Android NDK: 21.3.6528147
   IDEs:
-    Android Studio: 3.6 AI-192.7142.36.36.6241897
-    Xcode: 11.4/11E146 - /usr/bin/xcodebuild
+    Android Studio: 4.0 AI-193.6911.18.40.6626763
+    Xcode: 12.4/12D4e - /usr/bin/xcodebuild
   Languages:
     Java: 10.0.1 - /Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/bin/javac
     Python: 2.7.16 - /usr/bin/python
   npmPackages:
     @react-native-community/cli: Not Found
-    react: 16.11.0 => 16.11.0 
-    react-native: 0.62.2 => 0.62.2 
+    react: 17.0.2 => 17.0.2
+    react-native: 0.65.1 => 0.65.1
   npmGlobalPackages:
     *react-native*: Not Found
 
@@ -79,22 +79,44 @@ react-native init mopdemo
 1. 引入小程序引擎插件。在 package.json 文件中引入小程序 ReactNative 插件
 
 ```javascript
-"react-native-mopsdk": "^1.0.1"
+"react-native-mopsdk": "^1.0.2"
 ```
 
-2. 在 main.dart 文件中增加以下小程序引擎初始化方法。 Mop.instance.initialize 这里需要用到 sdkkey 和 secret。可以直接在[https://mp.finogeeks.com](https://mp.finogeeks.com) 免费注册获取。注册使用方法可以参考 [接入指引](https://mp.finogeeks.com/mop/document/introduce/access/mechanism.html)
+android 在 build.gradle 添加 maven 配置
+
+```bash
+  maven {
+      url "https://gradle.finogeeks.club/repository/applet/"
+      credentials {
+          username "applet"
+          password "123321"
+      }
+  }
+```
+
+iOS 需要重新 pod install
+
+2. 在 App.js 文件中增加以下小程序引擎初始化方法。 Mop.instance.initialize 这里需要用到 sdkkey 和 secret。可以直接在[https://mp.finogeeks.com](https://mp.finogeeks.com) 免费注册获取。注册使用方法可以参考 [接入指引](https://mp.finogeeks.com/mop/document/introduce/access/mechanism.html)
 
 ```javascript
 import MopSDK from 'react-native-mopsdk';
 // 1. mop初始化
-MopSDK.initialize({
-    appkey: '22LyZEib0gLTQdU3MUauASlb4KFRNRajt4RmY6UDSucA',
-    secret: '4a915e447bcbd439',
-    apiServer: 'https://mp.finogeeks.com',
-    apiPrefix: '/api/v1/mop'
-  }, (data) => {
-    console.log('message;', data);
-  });
+ MopSDK.initialize(
+      {
+        appkey: '22LyZEib0gLTQdU3MUauASlb4KFRNRajt4RmY6UDSucA',
+        secret: 'c5cc7a8c14a2b04a',
+        apiServer: 'https://api.finclip.com',
+        apiPrefix: '/api/v1/mop',
+      },
+      data => {
+        console.log('message;', data);
+        const s = JSON.stringify(data);
+        this.setState({
+          status: 'native callback received',
+          message: s,
+        });
+      },
+    );
 ```
 
 3. 打开小程序
