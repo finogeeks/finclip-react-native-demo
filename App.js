@@ -8,17 +8,17 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import MopSDK from 'react-native-mopsdk';
 const onPressOpenCanvasApplet = () => {
-  MopSDK.openApplet('5ea03fa563cb900001d73863', '', '', (data) => { });
+  MopSDK.openApplet('5ea03fa563cb900001d73863', '', '', data => {});
 };
 const onPressOpenDemoApplet = () => {
-  MopSDK.openApplet('5ea0401463cb900001d73865', '', '', (data) => { });
+  MopSDK.openApplet('5ea0401463cb900001d73865', '', '', data => {});
 };
 const onPressOpenProfileApplet = () => {
-  MopSDK.openApplet('5ea0412663cb900001d73867', '', '', (data) => { });
+  MopSDK.openApplet('5ea0412663cb900001d73867', '', '', data => {});
 };
 export default class App extends Component<{}> {
   state = {
@@ -30,10 +30,10 @@ export default class App extends Component<{}> {
       {
         appkey: '22LyZEib0gLTQdU3MUauASlb4KFRNRajt4RmY6UDSucA',
         secret: 'c5cc7a8c14a2b04a',
-        apiServer: 'https://mp.finogeeks.com',
+        apiServer: 'https://api.finclip.com',
         apiPrefix: '/api/v1/mop',
       },
-      (data) => {
+      data => {
         console.log('message;', data);
         const s = JSON.stringify(data);
         this.setState({
