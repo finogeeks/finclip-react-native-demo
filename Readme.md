@@ -1,133 +1,101 @@
-# 深入小程序系列之三、 ReactNative和小程序混编
+<p align="center">
+    <a href="https://www.finclip.com?from=github">
+    <img width="auto" src="https://www.finclip.com/mop/document/images/logo.png">
+    </a>
+</p>
 
-## 背景
+<p align="center"> 
+    <strong>FinClip ReactNative DEMO</strong></br>
+<p>
+<p align="center"> 
+        本项目提供在 ReactNative 环境中运行小程序的 DEMO 样例
+<p>
 
-本文我们将开一下脑洞，在 ReactNative 工程基础上下集成及运行小程序方案。
+<p align="center"> 
+	👉 <a href="https://www.finclip.com?from=github">https://www.finclip.com/</a> 👈
+</p>
 
-先看一下效果如下:
+-----
+## 🤔 FinClip 是什么?
 
-![](./docs/mop-react-native-demo.gif)
+有没有**想过**，开发好的微信小程序能放在自己的 APP 里直接运行，只需要开发一次小程序，就能在不同的应用中打开它，是不是很不可思议？
 
-## 环境搭建
+有没有**试过**，在自己的 APP 中引入一个 SDK ，应用中不仅可以打开小程序，还能自定义小程序接口，修改小程序样式，是不是觉得更不可思议？
 
-```
-npm install -g react-native-cli yarn
-```
-官方的[环境搭建文档](https://reactnative.dev/docs/environment-setup)已经有详细的说明，这里不再重复。大家可以看下我本地的环境配置版本，目前整个项目运行稳定，可以借鉴。
+这就是 FinClip ，就是有这么多不可思议！
 
-```bash
-$ react-native info
-info Fetching system and libraries information...
-System:
-    OS: macOS 10.15.3
-    CPU: (8) x64 Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz
-    Memory: 93.87 MB / 16.00 GB
-    Shell: 3.2.57 - /bin/bash
-  Binaries:
-    Node: 16.4.0 - ~/.nvm/versions/node/v10.20.1/bin/node
-    Yarn: 1.22.4 - ~/.nvm/versions/node/v10.20.1/bin/yarn
-    npm: 7.18.1 - ~/.nvm/versions/node/v10.20.1/bin/npm
-    Watchman: Not Found
-  Managers:
-    CocoaPods: 1.10.1 - /usr/local/bin/pod
-  SDKs:
-    iOS SDK:
-      Platforms: iOS 14.4, DriverKit 20.2, macOS 11.1, tvOS 14.3, watchOS 7.2
-    Android SDK:
-      API Levels: 22, 23, 24, 25, 26, 27, 28, 29, 30
-      Build Tools: 23.0.2, 23.0.3, 25.0.0, 26.0.2, 27.0.0, 27.0.3, 28.0.3, 29.0.2, 30.0.2
-      System Images: android-28 | Google APIs Intel x86 Atom, android-30 | Google APIs Intel x86 Atom
-      Android NDK: 21.3.6528147
-  IDEs:
-    Android Studio: 4.0 AI-193.6911.18.40.6626763
-    Xcode: 12.4/12D4e - /usr/bin/xcodebuild
-  Languages:
-    Java: 10.0.1 - /Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/bin/javac
-    Python: 2.7.16 - /usr/bin/python
-  npmPackages:
-    @react-native-community/cli: Not Found
-    react: 17.0.2 => 17.0.2
-    react-native: 0.65.1 => 0.65.1
-  npmGlobalPackages:
-    *react-native*: Not Found
+## 🤩 效果预览
 
-```
-## 新建 ReactNative 样例工程
+**本项目是 FinClip 小程序在 ReactNative 工程基础上下集成及运行小程序 DEMO 演示，您可以按照下方流程测试，验证 FinClip 小程序在 ReactNative 环境下的实际效果。**
 
+先看一下运行效果~
 
-### 新建 ReactNative 工程
+<p align="center">
+    <a href="#">
+    <img width="auto" src="./docs/mop-react-native-demo.gif">
+    </a>
+</p>
 
-```bash
+## ⚙️ 操作步骤
+### 第一步 引入小程序引擎插件
+在 `package.json` 文件中引入小程序 ReactNative 插件
 
-react-native init mopdemo
+`"react-native-mopsdk": "^1.0.1"`
 
-```
+### 第二步 初始化引擎
+在 `main.dart` 文件中增加以下小程序引擎初始化方法。
 
-稍等一会...
+在 Mop.instance.initialize 中，需要用到 `SDK KEY` 和 `SECRET`。
 
-初始化项目完成之后，你可以选择两种不同的方式运行 App 在 iOS/Android 平台：
-
-注意！ReactNative需要依赖本地安装对应的 iOS,Android 开发工具，即需要安装 Xcode 和 AndroidStudio。具体安装使用方法这里不赘述。
-
-这里我们用 VSCode+Xcode 作为开发组合环境。
-
-
-### 集成小程序解析引擎
-
-这里我们采用凡泰集成免费社区版的小程序解析引擎，只需要 10 行代码量不到即可完成小程序集成。
-
-1. 引入小程序引擎插件。在 package.json 文件中引入小程序 ReactNative 插件
-
-```javascript
-"react-native-mopsdk": "^1.0.2"
-```
-
-android 在 build.gradle 添加 maven 配置
-
-```bash
-  maven {
-      url "https://gradle.finogeeks.club/repository/applet/"
-      credentials {
-          username "applet"
-          password "123321"
-      }
-  }
-```
-
-iOS 需要重新 pod install
-
-2. 在 App.js 文件中增加以下小程序引擎初始化方法。 Mop.instance.initialize 这里需要用到 sdkkey 和 secret。可以直接在[https://mp.finogeeks.com](https://mp.finogeeks.com) 免费注册获取。注册使用方法可以参考 [接入指引](https://mp.finogeeks.com/mop/document/introduce/access/mechanism.html)
-
-```javascript
+```objc
 import MopSDK from 'react-native-mopsdk';
 // 1. mop初始化
- MopSDK.initialize(
-      {
-        appkey: '22LyZEib0gLTQdU3MUauASlb4KFRNRajt4RmY6UDSucA',
-        secret: 'c5cc7a8c14a2b04a',
-        apiServer: 'https://api.finclip.com',
-        apiPrefix: '/api/v1/mop',
-      },
-      data => {
-        console.log('message;', data);
-        const s = JSON.stringify(data);
-        this.setState({
-          status: 'native callback received',
-          message: s,
-        });
-      },
-    );
+MopSDK.initialize({
+    appkey: '22LyZEib0gLTQdU3MUauASlb4KFRNRajt4RmY6UDSucA',
+    secret: '4a915e447bcbd439',
+    apiServer: 'https://api.finclip.com',
+    apiPrefix: '/api/v1/mop'
+  }, (data) => {
+    console.log('message;', data);
+  });
 ```
 
-3. 打开小程序
-
-```javascript
+### 第三步 打开小程序
+```objc
 MopSDK.openApplet('appid','','',(data)=>{});
 ```
 
+- **SDK KEY** 和 **SDK SECRET** 可以从 [FinClip](https://finclip.com/#/home)  获取，点 [这里](https://finclip.com/#/register) 注册账号；
+- 进入平台后，在「应用管理」页面添加你自己的包名后，点击「复制」即可获得  key\secret\apisever 字段；
+- **apiServer** 和 **apiPrefix** 是固定字段，请直接参考本 DEMO ；
+- **小程序 ID** 是管理后台上架的小程序 APP ID，需要在「小程序管理」中创建并在「应用管理」中关联；
+> 小程序 ID 与 微信小程序ID 不一样哦！（这里是特指 FinClip 平台的 ID ）
 
-* **SDKKEY** 和 **Secret** 可以从前面部署的社区版的管理后台获取。
-* **apiServer** 为这里是小程序生态后端的服务地址也就是前文所输入的`IP:端口`。
-* **小程序id** 为在管理后台上架的小程序唯一ID(在小程序小架时自动生成)
-* 上述的参数可以在前文服务器部署的后台界面上获取，亦可以在没有部署服务端的情况下在[https://mp.finogeeks.com](https://mp.finogeeks.com)快速注册，免费获取。
-* **重要事情说三遍，您可以在官方的github仓库中查看示例代码** [https://github.com/finogeeks/mop-react-native-demo](https://github.com/finogeeks/mop-react-native-demo)
+
+## 📋 接口文档
+[点击这里](https://www.finclip.com/mop/document/introduce/quickStart/intergration-guide.html#_4-reactnative-%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90) 查看 React Native 快速集成文档
+
+## 🔗 常用链接
+以下内容是您在 FinClip 进行开发与体验时，常见的问题与指引信息
+
+- [FinClip 官网](https://www.finclip.com/#/home)
+- [示例小程序](https://www.finclip.com/#/market)
+- [文档中心](https://www.finclip.com/mop/document/)
+- [SDK 部署指南](https://www.finclip.com/mop/document/introduce/quickStart/intergration-guide.html)
+- [小程序代码结构](https://www.finclip.com/mop/document/develop/guide/structure.html)
+- [iOS 集成指引](https://www.finclip.com/mop/document/runtime-sdk/ios/ios-integrate.html)
+- [Android 集成指引](https://www.finclip.com/mop/document/runtime-sdk/android/android-integrate.html)
+- [Flutter 集成指引](https://www.finclip.com/mop/document/runtime-sdk/flutter/flutter-integrate.html)
+
+## ☎️ 联系我们
+微信扫描下面二维码，关注官方公众号 **「凡泰极客」**，获取更多精彩内容。<br>
+<img width="150px" src="https://www.finclip.com/mop/document/images/ic_qr.svg">
+
+微信扫描下面二维码，邀请进官方微信交流群（加好友备注：finclip 咨询），获取更多精彩内容。<br>
+<img width="150px" src="https://finclip-homeweb-1251849568.cos.ap-guangzhou.myqcloud.com/images/ldy111.jpg">
+
+## Stargazers
+[![Stargazers repo roster for @finogeeks/finclip-react-native-demo](https://reporoster.com/stars/finogeeks/finclip-react-native-demo)](https://github.com/finogeeks/finclip-react-native-demo/stargazers)
+
+## Forkers
+[![Forkers repo roster for @finogeeks/finclip-react-native-demo](https://reporoster.com/forks/finogeeks/finclip-react-native-demo)](https://github.com/finogeeks/finclip-react-native-demo/network/members)
