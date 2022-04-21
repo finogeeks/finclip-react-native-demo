@@ -233,8 +233,8 @@ const App: () => Node = () => {
       const eventEmitter = new NativeEventEmitter(NativeModules.FINMopSDK);
       MopSDK.initialize({
         appkey:
-          'Ev7QHvml1UcW98Y1GaLfRz34ReffbDESaTXbCoFyKhHm5K1hSIZ5WQtcH5E2Ow5V4P7ZoS9FWirImuaa/yIlLg==',
-        secret: '97f8e4dd3a0e7634',
+          'Ev7QHvml1UcW98Y1GaLfRz34ReffbDESaTXbCoFyKhEm0a3gam0elOOOdZ6Twpa3HkBzlvOwJ2cyhOrMVWuuGw==',
+        secret: '16f2d2700453ae51',
         apiServer: 'https://api.finclip.com',
         apiPrefix: '/api/v1/mop/',
         nativeEventEmitter: eventEmitter,
