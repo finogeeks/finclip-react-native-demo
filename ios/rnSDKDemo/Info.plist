@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>mopdemo</string>
+	<string>rnSDKDemo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,8 +35,28 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>是否允许使用蓝牙？</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>是否允许使用蓝牙？</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>是否允许使用日历？</string>
+	<key>NSCameraUsageDescription</key>
+	<string>是否允许使用你的相机？</string>
+	<key>NSContactsUsageDescription</key>
+	<string>开启同步通讯录信息，可智能补全客户资料。如果系统提示确认权限，请点击“好”。</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>我们需要通过您的地理位置信息获取您周边的相关数据</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>我们需要通过您的地理位置信息获取您周边的相关数据</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>我们需要通过您的地理位置信息获取您周边的相关数据</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>是否允许使用你的麦克风？</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>是否允许保存图片或视频到相册？</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>是否允许使用相册？</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
