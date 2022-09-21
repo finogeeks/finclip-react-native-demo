@@ -10,7 +10,7 @@ import React, {useState, useEffect} from 'react';
 import type {Node} from 'react';
 import BackgroundTimer from 'react-native-background-timer';
 
-const appId = '6260bf62e680b10001b1911f';
+const appId = '619c573efa4e8d00014354aa';
 import MopSDK from 'react-native-mopsdk';
 import {
   SafeAreaView,
@@ -233,8 +233,8 @@ const App: () => Node = () => {
       const eventEmitter = new NativeEventEmitter(NativeModules.FINMopSDK);
       MopSDK.initialize({
         appkey:
-          'Ev7QHvml1UcW98Y1GaLfRz34ReffbDESaTXbCoFyKhHm5K1hSIZ5WQtcH5E2Ow5V4P7ZoS9FWirImuaa/yIlLg==',
-        secret: '97f8e4dd3a0e7634',
+          'Ev7QHvml1UcW98Y1GaLfR0LcJMigON+OUj1ZAQ9vjy88YsusLl9OrWVQ8uEel91x',
+        secret: 'fd52fcbc3821f218',
         apiServer: 'https://api.finclip.com',
         apiPrefix: '/api/v1/mop/',
         nativeEventEmitter: eventEmitter,
