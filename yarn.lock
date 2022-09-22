@@ -5285,8 +5285,10 @@ react-native-codegen@^0.0.8:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-mopsdk@../../temp-work/react-native-mopsdk:
-  version "1.0.2"
+react-native-mopsdk@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-mopsdk/-/react-native-mopsdk-1.0.4.tgz#31f234416890b64695fbd5ae89fc30e51ff51a5c"
+  integrity sha512-cO6KyXILLG0IZ+PJUeNIEB7Ce6FWiS/fjluFlrqIzJIsqY6MnFHLMO7p2T3kAJvCnvnlErycGvqRdxFPhmJSAQ==
 
 react-native-permissions@^2.0.2:
   version "2.2.2"
