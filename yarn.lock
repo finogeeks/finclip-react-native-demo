@@ -5784,10 +5784,10 @@
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
 
-"react-native-mopsdk@^2.0.6":
-  "integrity" "sha512-/EE3T//RQG9855eeJa1NLjfIud0MaK5HiA5CAF2Io+jVYcgQ17C0omMEXY0nnuMAGlwsyrsdc1gL3QwB88Cc9w=="
-  "resolved" "https://registry.npmjs.org/react-native-mopsdk/-/react-native-mopsdk-2.0.6.tgz"
-  "version" "2.0.6"
+"react-native-mopsdk@^2.0.8":
+  "integrity" "sha512-2gQ0u4n00vCcgDadM5/isvG+PBujo2hC7e01wFCpAOfeJQ3nHUzADzQ8g57UuPMizrG+qi5gVB+kwaKnGfJ+dg=="
+  "resolved" "https://registry.npmjs.org/react-native-mopsdk/-/react-native-mopsdk-2.0.8.tgz"
+  "version" "2.0.8"
 
 "react-native-permissions@^2.0.2":
   "integrity" "sha512-ihf4shQDSX5Oo9ChQXb9kr13mmyyNem5MaEvOpr3dCjhBOBWyEMztXm9/uPK1Qg5PsNpaYLa1KpcPZDCw87LXg=="

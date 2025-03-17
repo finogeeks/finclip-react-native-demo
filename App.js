@@ -11,7 +11,7 @@ import type {Node} from 'react';
 import BackgroundTimer from 'react-native-background-timer';
 
 const appId = '6260bf62e680b10001b1911f';
-import MopSDK from 'react-native-mopsdk';
+import MopSDK, { Config, FinStoreConfig, BOOLState, LanguageType, UIConfig } from 'react-native-mopsdk';
 import {
   SafeAreaView,
   ScrollView,
@@ -231,22 +231,62 @@ const App: () => Node = () => {
   useEffect(() => {
     if (!isInited) {
       const eventEmitter = new NativeEventEmitter(NativeModules.FINMopSDK);
-      MopSDK.initialize({
-        appkey:
-          'Ev7QHvml1UcW98Y1GaLfRz34ReffbDESaTXbCoFyKhEm0a3gam0elOOOdZ6Twpa3HkBzlvOwJ2cyhOrMVWuuGw==',
-        secret: '16f2d2700453ae51',
-        apiServer: 'https://api.finclip.com',
-        apiPrefix: '/api/v1/mop/',
-        nativeEventEmitter: eventEmitter,
-        finMopSDK: NativeModules.FINMopSDK,
-      })
-        .then(res => {
-          isInited = true;
-          Alert.alert('初始化成功');
-        })
-        .catch(error => {
-          Alert.alert('初始化失败');
+      // MopSDK.initialize({
+      //   appkey:
+      //     'Ev7QHvml1UcW98Y1GaLfRz34ReffbDESaTXbCoFyKhEm0a3gam0elOOOdZ6Twpa3HkBzlvOwJ2cyhOrMVWuuGw==',
+      //   secret: '16f2d2700453ae51',
+      //   apiServer: 'https://api.finclip.com',
+      //   apiPrefix: '/api/v1/mop/',
+      //   nativeEventEmitter: eventEmitter,
+      //   finMopSDK: NativeModules.FINMopSDK,
+      // })
+      //   .then(res => {
+      //     isInited = true;
+      //     Alert.alert('初始化成功');
+      //   })
+      //   .catch(error => {
+      //     Alert.alert('初始化失败');
+      //   });
+
+      let finStoreConfigA = new FinStoreConfig(
+        'Ev7QHvml1UcW98Y1GaLfRz34ReffbDESaTXbCoFyKhEm0a3gam0elOOOdZ6Twpa3HkBzlvOwJ2cyhOrMVWuuGw==',
+        '16f2d2700453ae51',
+        "https://api.finclip.com");
+
+        let finStoreConfigs = [finStoreConfigA];
+        let config = new Config(finStoreConfigs, {
+          language:LanguageType.Chinese,
+          userId:"123456789",
+          debug:true,
+          appletDebugMode:BOOLState.BOOLStateTrue,
+          baseLoadingViewClass:"LoadingView"
+        }) ;
+        let uiConfig = new UIConfig({
+          isHideClearCacheMenu:true,
+          loadingLayoutCls:"com.rnsdkdemo.MyAppletLoadingPage"
         });
+        let params = {
+          config: config,
+          uiConfig: uiConfig,
+          finMopSDK: NativeModules.FINMopSDK,
+          nativeEventEmitter: eventEmitter
+        }
+    
+        MopSDK.initSDK(params).then((res) => {
+          console.log('message: ', res);
+          const s = JSON.stringify(res);
+          this.setState({
+            status: 'native callback received',
+            message: s,
+          });
+        }).catch((error) => {
+          console.log('init error: ', error);
+          const s = 'initialize fail'
+          this.setState({
+            status: 'native callback received',
+            message: s,
+          });
+        })
     }
   });
 
