@@ -222,6 +222,15 @@ const setActivityTransitionAnim = () => {
   console.log('setActivityTransitionAnim call');
   MopSDK.setActivityTransitionAnim('SlideFromBottomToTopAnim');
 };
+
+const getBindApplets = () => {
+  MopSDK.getBindApplets({apiServer:"https://api.finclip.com", appClass:"金融", appStatus:1, pageNo:1, pageSize:20}).then((res) => {
+    console.log('getBindApplets success: ', res);
+  }).catch((error) => {
+    console.error('getBindApplets error: ', error);
+  })
+};
+
 const App: () => Node = () => {
   const [isShowScaner, setIsShowScaner] = useState(false);
   const [qrcode, setQrcode] = useState('');
@@ -257,6 +266,8 @@ const App: () => Node = () => {
         let config = new Config(finStoreConfigs, {
           language:LanguageType.Chinese,
           userId:"123456789",
+          channel:"finclip_channel",
+          phone:"13012345678",
           debug:true,
           appletDebugMode:BOOLState.BOOLStateTrue,
           baseLoadingViewClass:"LoadingView"
@@ -349,6 +360,10 @@ const App: () => Node = () => {
           <Button
             title="设置小程序切换动画（仅安卓）"
             onPress={setActivityTransitionAnim}
+          />
+          <Button
+            title="获取绑定的小程序列表"
+            onPress={getBindApplets}
           />
         </View>
       </ScrollView>

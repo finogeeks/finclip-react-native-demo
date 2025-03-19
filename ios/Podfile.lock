@@ -287,7 +287,7 @@ PODS:
     - React-Core
   - react-native-camera/RN (4.2.1):
     - React-Core
-  - react-native-mopsdk (2.0.8):
+  - react-native-mopsdk (2.0.9):
     - FinApplet (= 2.47.5)
     - FinAppletExt (= 2.47.5)
     - React
@@ -555,7 +555,7 @@ SPEC CHECKSUMS:
   React-logger: a1f028f6d8639a3f364ef80419e5e862e1115250
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
-  react-native-mopsdk: 7ce033dd83afb80d000e8e8a70dd8ed1adfce983
+  react-native-mopsdk: 6b1a093a6cf4bb43e02f38de19afc378442f81dd
   React-perflogger: 0afaf2f01a47fd0fc368a93bfbb5bd3b26db6e7f
   React-RCTActionSheet: 59f35c4029e0b532fc42114241a06e170b7431a2
   React-RCTAnimation: aae4f4bed122e78bdab72f7118d291d70a932ce2
