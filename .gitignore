@@ -34,6 +34,8 @@ local.properties
 *.ap_
 *.aar
 output.json
+*.hprof
+*.trace
 
 # node.js
 node_modules/
