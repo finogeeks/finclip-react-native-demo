@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(watchman:*)",
+      "Bash(npx react-native start:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

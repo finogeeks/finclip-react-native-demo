@@ -32,8 +32,14 @@ import ScanScreen from './scanner.js';
 let isInited = false;
 
 const openApplet = () => {
-  MopSDK.openApplet({appId});
+  // MopSDK.openApplet({appId});
+  MopSDK.startApplet({appletId: "5f17f457297b540001e06ebb", isSingleProcess: true})
 };
+
+const scanApplet = () => {
+  var qrCode = 'https://api.finclip.com/api/v1/mop/runtime/applet/-f-71bf32a0bf3a0900--';
+  MopSDK.qrcodeOpenApplet(qrCode, true);
+}
 
 const getCurrentApplet = callback => {
   let time = 0;
@@ -87,7 +93,6 @@ const registerAppletHandler = () => {
   const handler = {
     forwardApplet(params) {
       console.log('forwardApplet call', params);
-      return [];
     },
     getUserInfo(params) {
       console.log('getUserInfo call', params);
@@ -160,11 +165,11 @@ const registerExtensionApi = () => {
   const rnCustomAPI = params => {
     console.warn('自定义 api rn rnCustomAPI call', params);
     return {
-      errMsg: 'rnCustomAPI:ok',
-      data: 'webCustomAPI',
+      errMsg: 'presentNativePage:ok',
+      code: '550e8400-e29b-41d4-a716-446655440000',
     };
   };
-  MopSDK.registerExtensionApi('rnCustomAPI', rnCustomAPI);
+  MopSDK.registerExtensionApi('presentNativePage', rnCustomAPI);
 };
 
 const callJS = () => {
@@ -224,7 +229,7 @@ const setActivityTransitionAnim = () => {
 };
 
 const getBindApplets = () => {
-  MopSDK.getBindApplets({apiServer:"https://api.finclip.com", appClass:"金融", appStatus:1, pageNo:1, pageSize:20}).then((res) => {
+  MopSDK.getBindApplets({apiServer:"https://api.finclip.com", appClass:"金融", appStatus:1, pageNo:3, pageSize:20}).then((res) => {
     console.log('getBindApplets success: ', res);
   }).catch((error) => {
     console.error('getBindApplets error: ', error);
@@ -298,6 +303,8 @@ const App: () => Node = () => {
             message: s,
           });
         })
+
+
     }
   });
 
@@ -325,6 +332,7 @@ const App: () => Node = () => {
           <Text style={styles.mainTitle}> React Native SDK Demo</Text>
           <Text style={styles.subTitle}>打开小程序</Text>
           <Button title="打开小程序" onPress={openApplet} />
+          <Button title="扫码打开小程序" onPress={scanApplet} />
 
           <Button
             title="查看小程序当前信息"
